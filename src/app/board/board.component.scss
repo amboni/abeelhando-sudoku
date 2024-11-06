@@ -1,0 +1,47 @@
+#boardDiv {
+    border: 5px solid;
+    margin: auto;
+    width: 90vw;
+    display: grid;
+    // align-content: space-evenly;
+    // justify-content: space-around;
+    // align-items: stretch;
+    // justify-items: stretch;
+    
+    grid-template-columns: auto auto auto;
+
+}
+
+#innerBoardDiv {
+    border: 2px solid;
+    margin: 0;
+    width: 100%;
+    display: grid;
+    // align-content: space-evenly;
+    // justify-content: space-around;
+    // align-items: stretch;
+    justify-items: stretch;
+    // grid-template-columns: auto auto auto;
+
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 3fr 3fr 3fr;
+
+}
+
+#cellDiv {
+    display: grid;
+    border: 1px solid gray;
+    margin: 0;
+    text-align: center;    
+    // height: 80px;
+    height: 7vh;
+    align-items: center;
+    font-size: x-large;    
+}
+
+
+.cellGenerated {
+    //background-color: bisque;
+    //background-color: mat.get-theme-color($theme, primary, 50);
+    font-weight: bolder;
+}

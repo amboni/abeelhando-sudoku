@@ -1,0 +1,17 @@
+<div id="boardDiv">
+
+    @for (sections of board.data; track $index; let i = $index ) {
+
+        <div id="innerBoardDiv">
+            @for (c of sections; track $index; let j = $index) {
+                <div id="cellDiv" [ngClass]="{cellGenerated: c.generated, cellSelected: c.selected}" (click)="selectCell(i, j)">
+                    {{c.value}}
+                </div>
+            }
+        </div>
+
+    }
+    
+
+
+</div>

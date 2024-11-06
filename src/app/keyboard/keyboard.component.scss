@@ -1,0 +1,12 @@
+#keyboardDiv {
+    margin: auto;
+    width: 65%;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-row-gap: 10px;
+    justify-content: space-around;
+}
+
+.keyboardButton {
+    font-size: x-large;
+}
