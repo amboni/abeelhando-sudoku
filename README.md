@@ -34,6 +34,12 @@ ng add @angular/material
 Example:
 https://www.nytimes.com/puzzles/sudoku/easy
 
+(Mathematics of Sudoku)
+https://en.wikipedia.org/wiki/Mathematics_of_Sudoku#:~:text=An%20ordinary%20puzzle%20with%20a,clues%20in%20the%2081%20cells.
+
+Paper (Not so good!):
+https://sites.math.washington.edu/~morrow/mcm/team2306.pdf
+
 ## Setup git credentials
 git config --global user.email "eramboni@gmail.com"
 git config --global user.name "Ricardo Amboni"

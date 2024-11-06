@@ -1,7 +1,19 @@
-<div id="boardDiv">
+<table>
+    @for (rows of board.data; track $index; let i = $index ) {
+        <tr>
+            @for (c of rows; track $index; let j = $index) {
+                <td>
+                    <div id="cellDiv" [ngClass]="{cellGenerated: c.generated, cellSelected: c.selected}" (click)="selectCell(i, j)">
+                        {{c.value}}
+                    </div>
+                </td>
+            }
+        </tr>
+    }
+</table>
 
+<!-- <div id="boardDiv">    
     @for (sections of board.data; track $index; let i = $index ) {
-
         <div id="innerBoardDiv">
             @for (c of sections; track $index; let j = $index) {
                 <div id="cellDiv" [ngClass]="{cellGenerated: c.generated, cellSelected: c.selected}" (click)="selectCell(i, j)">
@@ -9,9 +21,5 @@
                 </div>
             }
         </div>
-
-    }
-    
-
-
-</div>
+    }    
+</div> -->
