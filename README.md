@@ -60,6 +60,19 @@ ng g class models/Key
 ## Run single service test
 ng test --include="**/sudoku.service.spec.ts"
 
+## Demo Site:
+https://amboni.github.io/abeelhando-sudoku/
+
+
+## Deploy dist to Github website:
+(Just once)
+ng add angular-cli-ghpages
+
+ng build --base-href "https://amboni.github.io/abeelhando-sudoku/"
+
+
+npx angular-cli-ghpages --dir=dist/abeelhando-sudoku
+
 
 ## TODO
 - Tab Settings: Keyboard Filter, Error Indicator, Number Hightlight
