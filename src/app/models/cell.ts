@@ -5,6 +5,7 @@ export class Cell {
     value = "";
     generated = false;
     selected = false;
+    highlight = false;
 
 
     constructor(x: number, y: number, v: string = "") {
@@ -13,6 +14,11 @@ export class Cell {
         this.value = v;
         if (v) this.generated = true;
     }
+
+    isEmpty():boolean {
+        return this.value == "";
+    }
+
 
 
 }

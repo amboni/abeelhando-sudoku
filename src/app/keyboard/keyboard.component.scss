@@ -1,12 +1,47 @@
+#mainDiv {
+    margin-top: 20px;
+    width: 100%;
+    border: 2px solid;
+    padding: 10px;
+}
+
 #keyboardDiv {
-    margin: auto;
-    width: 65%;
+    margin: auto;    
+    // width: 65%;
     display: grid;
-    grid-template-columns: auto auto auto;
+    // grid-template-columns: auto auto auto;
+    grid-template-columns: auto auto auto auto auto;
     grid-row-gap: 10px;
     justify-content: space-around;
 }
 
 .keyboardButton {
     font-size: x-large;
+}
+
+
+
+
+
+
+
+
+@media (min-width: 600px) {
+
+    #keyboardDiv {
+        grid-template-columns: auto auto auto;        
+    }
+
+    #bottonDiv {
+        display: flex;
+        margin: 20px;
+        grid-column: span 3;
+    }
+    
+
+    #clearBtn {
+        margin: auto; 
+        width: 70%;
+    }
+    
 }

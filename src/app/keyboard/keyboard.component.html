@@ -1,3 +1,5 @@
+<div id="mainDiv">
+
 <div id="keyboardDiv">
 
     @for (k of keys; track $index) {        
@@ -5,6 +7,14 @@
             {{k.value}}            
         </button>        
     }
+
+    <div id="bottonDiv">
+        <button id="clearBtn" mat-fab [disabled]="clearDisabled" (click)="clear()" >Clear</button>    
+    </div>    
+
+</div>
+
+
 
 </div>
 

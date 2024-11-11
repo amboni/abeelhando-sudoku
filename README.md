@@ -52,5 +52,14 @@ ng g c Keyboard
 ng g service Sudoku
 
 ng g class models/Board
+ng g class models/BoardPlay
 ng g class models/Cell
 ng g class models/Key
+
+
+## Run single service test
+ng test --include="**/sudoku.service.spec.ts"
+
+
+## TODO
+- Tab Settings: Keyboard Filter, Error Indicator, Number Hightlight

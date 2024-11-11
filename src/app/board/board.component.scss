@@ -5,7 +5,7 @@ table {
 }
 
 tr {
-    height: 7vh;
+    // height: 7vh;
     text-align: center;
 }
 
@@ -39,41 +39,13 @@ td:nth-child(4), td:nth-child(7) {
 
 
 
-//Not USED!!
-#boardDiv {
-    border: 5px solid;
-    margin: auto;
-    width: 90vw;
-    display: grid;    
-    grid-template-columns: auto auto auto;
-}
-
-#innerBoardDiv {
-    border: 2px solid;
-    margin: 0;
-    width: 100%;
-    display: grid;
-    // align-content: space-evenly;
-    // justify-content: space-around;
-    // align-items: stretch;
-    justify-items: stretch;
-    // grid-template-columns: auto auto auto;
-
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 3fr 3fr 3fr;
-
-}
-
-//END Not USED!!
-
-
 
 #cellDiv {
     display: grid;
     border: 1px solid gray;
     margin: 0;
     text-align: center;       
-    height: 7vh;
+    height: 7vh;    
     align-items: center;
     font-size: x-large;    
 }
@@ -83,4 +55,17 @@ td:nth-child(4), td:nth-child(7) {
     //background-color: bisque;
     //background-color: mat.get-theme-color($theme, primary, 50);
     font-weight: bolder;
+}
+
+@media (min-width: 600px) {
+
+    table {
+        max-width: 60vw;
+    }
+
+    #cellDiv {
+        height: 8vh;        
+    }
+    
+
 }

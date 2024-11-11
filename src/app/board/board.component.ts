@@ -17,6 +17,7 @@ export class BoardComponent {
   @Output() onCellSelected = new EventEmitter<Cell>()
 
   selectCell(x: number, y: number) {    
+    this.board.clear();
     let cell = this.board.selectCell(x, y);
     this.onCellSelected.emit(cell);
   }

@@ -7,10 +7,18 @@
         background-color: mat.get-theme-color($theme, primary, 90);        
     }  
 
+    .cellHighlight {
+      //background-color: mat.get-theme-color($theme, primary, 50);
+      background-color: mat.get-theme-color($theme, secondary, 60);
+      color: mat.get-theme-color($theme, neutral, 90);
+    }    
+
     .cellSelected {
         background-color: mat.get-theme-color($theme, tertiary, 60);        
         color: mat.get-theme-color($theme, neutral, 30);
     }
+
+
 }
 
 @mixin typography($theme) {

@@ -1,4 +1,12 @@
 import { Component } from '@angular/core';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatMenuModule} from '@angular/material/menu';
+
+
+
+
 import { BoardComponent } from "../board/board.component";
 import { CommonModule } from '@angular/common';
 import { KeyboardComponent } from "../keyboard/keyboard.component";
@@ -10,7 +18,7 @@ import { Key } from '../models/key';
 @Component({
   selector: 'app-game',
   standalone: true,
-  imports: [BoardComponent, CommonModule, KeyboardComponent],
+  imports: [BoardComponent, CommonModule, KeyboardComponent,MatToolbarModule, MatButtonModule, MatIconModule, MatMenuModule],  
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss'
 })
@@ -24,9 +32,9 @@ export class GameComponent {
     this.keys = sudoku.createOrGetKeys();    
   }
 
-  updateKeyboard(c: Cell) {
-    console.log("updateKeyboard: ", c);
-    this.board.setupAvailableKeys(c, this.keys);
+  setupSelectedCell(c: Cell) {
+    console.log("updateKeyboard: ", c);    
+    this.board.setupAvailableKeys(c, this.keys);    
   }
 
 

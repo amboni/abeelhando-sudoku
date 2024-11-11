@@ -1,7 +1,40 @@
-<div id="topDiv"></div>
+<div id="topDiv">
 
-<app-board id="board" [board]="board" (onCellSelected)="updateKeyboard($event)"></app-board>
-<br/>
-<app-keyboard [keys]="keys"></app-keyboard>
+
+    <mat-toolbar>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <span>Sudoku</span>
+        <span class="toolbar-spacer"></span>
+        <button mat-icon-button>
+            <mat-icon>refresh</mat-icon>
+        </button>
+        <!-- <button mat-icon-button  >
+        <mat-icon>share</mat-icon>
+    </button> -->
+    </mat-toolbar>
+
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+            <mat-icon>dialpad</mat-icon>
+            <span>Redial</span>
+        </button>
+        <button mat-menu-item disabled>
+            <mat-icon>voicemail</mat-icon>
+            <span>Check voice mail</span>
+        </button>
+        <button mat-menu-item>
+            <mat-icon>notifications_off</mat-icon>
+            <span>Disable alerts</span>
+        </button>
+    </mat-menu>
+
+</div>
+
+<div id="mainDiv">
+<app-board id="board" [board]="board" (onCellSelected)="setupSelectedCell($event)"></app-board>
+<app-keyboard [board]="board" [keys]="keys"></app-keyboard>
+</div>
 
 <footer></footer>
