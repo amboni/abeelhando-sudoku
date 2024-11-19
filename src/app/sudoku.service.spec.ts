@@ -23,10 +23,29 @@ describe('SudokuService', () => {
     expect(board.selectedCell).toBeFalsy;
   });
 
+
   it('search Solution', () => {
     let board = service.initGame();
     let s = service.seachSolution(board);    
     expect(s).toBeTruthy();
+  });
+
+  it('is valid Sudoku', () => {
+    let board = service.initGame();
+    let s = service.seachSolution(board);    
+    expect(s).toBeTruthy();
+    expect(s.isValid()).toBeTruthy();
+  });
+
+  it('Board Clone', () => {
+    let board = service.initGame();    
+    expect(board).toBeTruthy();
+    let c = board.clone();
+    expect(c).toBeTruthy();
+    console.log("Cloned Cell: ", c.data[0][0]);
+    c.isValid();
+    c.data[0][0].isEmpty();
+
   });
 
 });

@@ -24,6 +24,7 @@ import { Key } from '../models/key';
 })
 export class GameComponent {
 
+
   board: Board;
   keys: Key[];
 
@@ -35,6 +36,10 @@ export class GameComponent {
   setupSelectedCell(c: Cell) {
     console.log("updateKeyboard: ", c);    
     this.board.setupAvailableKeys(c, this.keys);    
+  }
+
+  newGame() {
+    this.board = this.sudoku.initGame();
   }
 
 

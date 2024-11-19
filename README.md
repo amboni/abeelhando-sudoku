@@ -71,7 +71,10 @@ ng add angular-cli-ghpages
 ng build --base-href "https://amboni.github.io/abeelhando-sudoku/"
 
 
-npx angular-cli-ghpages --dir=dist/abeelhando-sudoku
+(WORKS!!!)
+npx angular-cli-ghpages --dir=dist/abeelhando-sudoku/browser
+
+NOT WORKING!! npx angular-cli-ghpages --dir=dist/abeelhando-sudoku
 
 
 ## TODO

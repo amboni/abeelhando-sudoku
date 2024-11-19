@@ -2,16 +2,18 @@
     margin-top: 20px;
     width: 100%;
     border: 2px solid;
-    padding: 10px;
+    // padding: 10px;
 }
 
 #keyboardDiv {
+    padding: 15px;
     margin: auto;    
     // width: 65%;
     display: grid;
     // grid-template-columns: auto auto auto;
     grid-template-columns: auto auto auto auto auto;
     grid-row-gap: 10px;
+    grid-column-gap: 5px;
     justify-content: space-around;
 }
 

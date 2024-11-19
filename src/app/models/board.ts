@@ -106,22 +106,178 @@ export class Board {
     }
 
 
+    removeRandom(numToRemove: number) {
+        let totalCompletedCells = this.findNumCompletedCells();
+        if (totalCompletedCells < numToRemove  + 19) throw new Error("Cannot remove " + numToRemove + " because there are not enough completed cells: " + totalCompletedCells);
+
+        for (let i = 0; i < numToRemove; i++) {
+            let x = -1;
+            let y = -1;
+            do {
+                x = Math.floor(Math.random() * 9);
+                y = Math.floor(Math.random() * 9);                
+
+            } while(this.data[x][y].isEmpty());
+
+            this.data[x][y].reset();            
+        }
+        
+        
+    }
+
+    findNumEmptyCells(): number {
+        const counter = { total: 0 };
+        const resetSelectedFn = (cell: any) => { if (cell.isEmpty()) counter.total++; };
+        this.transverseData(resetSelectedFn);
+        return counter.total;
+    }
+
+
+    findNumCompletedCells(): number {
+        const counter = { total: 0 };
+        const resetSelectedFn = (cell: any) => { if (!cell.isEmpty()) counter.total++; };
+        this.transverseData(resetSelectedFn);
+        return counter.total;
+    }
+    
 
     resetSelected() {
         const resetSelectedFn = (cell: any) => cell.selected = false;
         this.transverseData(resetSelectedFn);
     }
 
-
     transverseData(dataFn: any) {
         for (let i = 0; i < this.data.length; i++) {
             const section = this.data[i];
             for (let j = 0; j < section.length; j++) {
                 const cell = section[j];
-                dataFn(cell, i, j);
+                dataFn(cell, i, j, this.data);
             }
         }
     }
+
+
+	
+	public play(p: BoardPlay) {
+		this.data[p.x][p.y].value = p.optionToPlay;		
+	}
+	
+	public resetMove(p: BoardPlay) {
+		this.data[p.x][p.y].reset();		
+	}
+
+
+	public isValid(): boolean {
+		if (!this.areAllColsValid()) return false;
+		if (!this.areAllRowsValid()) return false;
+		if (!this.areAllGroupsValid()) return false;
+
+		return true;
+	}
+
+
+
+	areAllRowsValid(): boolean {
+		let keys: Key[] = [];
+		for (let i = 0; i < this.data.length; i++) {
+			for (let j = 0; j < this.data[i].length; j++) {
+				let c: Cell = this.data[i][j];
+				if (!c.isEmpty) {
+					if (Key.contains(c, keys)) {
+						console.log("Invalid row x: " + i + " - y: " + j + " - value: " + c);
+						return false;
+						
+					} else {                        
+                        keys.push( { value: c.value, disabled: false } );
+                    }
+				}
+			}
+			keys = [];
+		}
+		return true;
+	}
+
+	areAllColsValid(): boolean {
+		let keys: Key[] = [];
+		for (let i = 0; i < this.data.length; i++) {
+			for (let j = 0; j < this.data[i].length; j++) {
+				let c: Cell = this.data[j][i];
+				if (!c.isEmpty()) {
+					if (Key.contains(c, keys)) {
+						console.log("Invalid col x: " + j + " - y: " + i + " - value: " + c);
+						return false;
+					} else keys.push( { value: c.value, disabled: false } );
+				}
+			}
+			keys = [];
+		}
+		return true;
+	}
+
+	areAllGroupsValid(): boolean {
+		let groupRow = 0;
+		let groupCol = 0;
+
+		// Loop through 9 groups
+		for (let i = 0; i < 3; i++) {
+			for (let j = 0; j < 3; j++) {
+				if (!this.isGroupValid(groupRow, groupCol)) {
+					console.log("Invalid group groupRow: " + groupRow + " - groupCol: " + groupCol);
+					return false;
+				}
+				else groupCol += 3;
+			}
+			groupRow += 3;
+			groupCol = 0;
+		}
+
+		return true;
+	}
+
+	isGroupValid(groupRow: number, groupCol: number): boolean {
+		let keys: Key[] = [];
+		for (let i = 0; i < 3; i++) {
+			for (let j = 0; j < 3; j++) {
+				let c: Cell = this.data[groupRow + i][groupCol + j];
+				if (!c.isEmpty()) {
+					if (Key.contains(c, keys))
+						return false;
+					else keys.push( { value: c.value, disabled: false } );
+				}
+			}
+		}
+		return true;
+	}
+
+
+
+
+
+	public findOptionsToPlay(p: BoardPlay, keys: Key[]): Key[] {
+		let options = [... keys];
+		
+		for (let i = 0; i < this.data.length; i++) {
+            Key.removeKeyFromCell(this.data[p.x][i], options);
+		}
+		
+		for (let i = 0; i < this.data.length; i++) {
+            Key.removeKeyFromCell(this.data[i][p.y], options);
+		}
+		
+		let groupNumber = Board.findBoardGroupNumber(p.x, p.y);
+		for (let i = 0; i < this.data.length; i++) {
+			for (let j = 0; j < this.data.length; j++) {
+                let c: Cell = this.data[i][j];
+				if (c.isEmpty() && groupNumber == Board.findBoardGroupNumber(i, j)) {
+                    Key.removeKeyFromCell(c, options);
+                }
+			}				
+		}
+		
+		
+		return options;
+	}
+
 
     findBestMove(): BoardPlay {
         let counterMap = this.countNumbersInBoard();
@@ -136,8 +292,6 @@ export class Board {
 		
 		
 		if (maxKey == null) maxKey = this.findRandomKey();
-		
-				
 		let p = this.findEmptyPlaceToPlay(maxKey);
 		return p;
     }
@@ -153,7 +307,7 @@ export class Board {
 		let counterMap:any = {};
 		for (let i = 0; i < this.data.length; i++) {
 			for (let j = 0; j < this.data[i].length; j++) {
-				let c = this.data[i][j];
+				let c: Cell = this.data[i][j];
 				if (!c.isEmpty()) {					
 					this.incrementCounter(counterMap, "R" + i);
 					this.incrementCounter(counterMap, "C" + j);
@@ -223,14 +377,6 @@ export class Board {
 	
 
 
-  
-
-
-
-
-
-
-
     public static findBoardGroupNumber(row: number, col: number) {
         //Valid groups are 0, 1, 2 .... 8
         let groupNumber = -1;
@@ -249,6 +395,23 @@ export class Board {
         }
         return groupNumber;
     }
+
+
+    clone(): Board {
+        let b = JSON.parse( JSON.stringify(this) );
+        let c: Board = Object.assign(new Board(), b);
+
+        const assignCellFn = (cell: Cell, i:number, j: number, data: any[]) => data[i][j] = new Cell(cell.x, cell.y, cell.value);
+        c.transverseData(assignCellFn);
+        
+
+        //IT does not do recursive Object.assign() !!
+        //let c: Board = structuredClone(this);
+
+        return c;
+    }
+    
+
 
 
 
@@ -296,6 +459,7 @@ export class Board {
 
         return b;
     }
+
 
 
 

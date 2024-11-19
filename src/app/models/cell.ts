@@ -19,6 +19,11 @@ export class Cell {
         return this.value == "";
     }
 
+    reset() {
+        this.value = "";
+        //this.generated = false;
+    }
+
 
 
 }

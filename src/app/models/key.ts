@@ -1,6 +1,7 @@
 import { Cell } from "./cell";
 
 export class Key {
+    
 
     value = "";
     disabled = false;
@@ -15,6 +16,20 @@ export class Key {
         let obj = keys.find(e => e.value == c.value);
         if (obj) obj.disabled = true;
     }
+
+    static contains(c: Cell, keys: Key[]): boolean {
+        let index = keys.findIndex(e => e.value == c.value);
+        return (index != -1);
+    }
+
+
+
+    static removeKeyFromCell(c: Cell, keys: Key[]) {
+        let index = keys.findIndex(e => e.value == c.value);
+        if (index != -1) {
+            keys.splice( index, 1 );				
+        }        
+    }    
 
 
 }
