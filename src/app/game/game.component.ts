@@ -34,12 +34,15 @@ export class GameComponent {
   }
 
   setupSelectedCell(c: Cell) {
-    console.log("updateKeyboard: ", c);    
+    console.log("updateKeyboard: ", c);
+    Key.resetAllKeys(this.keys, true);
     this.board.setupAvailableKeys(c, this.keys);    
   }
 
   newGame() {
     this.board = this.sudoku.initGame();
+    Key.resetAllKeys(this.keys, true);
+    
   }
 
 

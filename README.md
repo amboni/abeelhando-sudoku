@@ -74,8 +74,6 @@ ng build --base-href "https://amboni.github.io/abeelhando-sudoku/"
 (WORKS!!!)
 npx angular-cli-ghpages --dir=dist/abeelhando-sudoku/browser
 
-NOT WORKING!! npx angular-cli-ghpages --dir=dist/abeelhando-sudoku
-
 
 ## TODO
 - Tab Settings: Keyboard Filter, Error Indicator, Number Hightlight

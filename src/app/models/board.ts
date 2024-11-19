@@ -106,7 +106,7 @@ export class Board {
     }
 
 
-    removeRandom(numToRemove: number) {
+    removeRandomFromCompletedBoard(numToRemove: number) {
         let totalCompletedCells = this.findNumCompletedCells();
         if (totalCompletedCells < numToRemove  + 19) throw new Error("Cannot remove " + numToRemove + " because there are not enough completed cells: " + totalCompletedCells);
 
@@ -121,6 +121,12 @@ export class Board {
 
             this.data[x][y].reset();            
         }
+
+        const checkGeneratedCellFn = (cell: any) => { 
+            if (!cell.isEmpty()) cell.generated = true; 
+            else cell.generated = false;
+        };
+        this.transverseData(checkGeneratedCellFn);
         
         
     }

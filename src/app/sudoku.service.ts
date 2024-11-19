@@ -33,7 +33,7 @@ export class SudokuService {
     let b = Board.create(str);
     this.seachSolution(b);
     this.solution = b.clone();
-    b.removeRandom(30);
+    b.removeRandomFromCompletedBoard(30);
     
     this.board = b;    
     return this.board;

@@ -6,9 +6,9 @@ export class Key {
     value = "";
     disabled = false;
     
-    public static resetAllKeys(keys: Key[]) {
+    public static resetAllKeys(keys: Key[], disabled = false) {
         for (let k of keys) {
-            k.disabled = false;
+            k.disabled = disabled;
         }
     }
 
