@@ -1,0 +1,87 @@
+<div class="divDialog">
+
+
+    <div mat-dialog-title class="dialog-title">
+        <button mat-icon-button aria-label="close dialog" mat-dialog-close class="close-dialog-button">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+
+
+    <mat-tab-group>
+        <mat-tab label="Game Options - {{title}}">
+            <form [formGroup]="settingsForm">
+
+
+                <section>
+                    <mat-checkbox formControlName="highlightNumbers">Highlight Selected Number</mat-checkbox>
+                </section>
+
+                <section>
+                    <mat-checkbox formControlName="removeKeyboardWrongOptions">Remove Keyboard Wrong Options</mat-checkbox>
+                </section>                
+
+
+                <!-- <mat-divider></mat-divider> -->
+
+                <section>
+                    <!-- <mat-checkbox formControlName="training">Training</mat-checkbox> -->
+                    <label id="modeLabel" >Mode</label>                    
+                </section>                
+
+
+                <mat-divider></mat-divider>
+
+                <section>
+                    <!-- <mat-checkbox formControlName="allRecords" (change)="changeAll($event)">All Words</mat-checkbox> -->
+                </section>
+
+                <!-- <mat-slider [max]="max" [min]="0" [disabled]="all">
+                    <input #startSlider formControlName="startPos" matSliderStartThumb>
+                    <input #endSlider formControlName="endPos" matSliderEndThumb>
+                </mat-slider> -->
+                <div id="inputSlideDiv">
+
+                    <!-- <mat-form-field>
+                        <mat-label>Start Word Index</mat-label>
+                        <input matInput readonly="true" [disabled]="all" value="{{startSlider.value}}">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>End Word Index</mat-label>
+                        <input matInput readonly="true" [disabled]="all" value="{{endSlider.value}}">
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <mat-label>Select Letter</mat-label>
+                        <mat-select formControlName="letter" (valueChange)="changeLetter($event)">
+                            <mat-option value=""></mat-option>
+                            <mat-option *ngFor="let l of letters" value="{{l}}">{{l}}</mat-option>
+                        </mat-select>
+                    </mat-form-field> -->
+                </div>
+            </form>
+        </mat-tab>
+
+        <mat-tab label="Other Settings">
+            <form [formGroup]="settingsForm">
+
+
+            </form>
+        </mat-tab>        
+    </mat-tab-group>
+    <div>
+
+
+
+        <mat-divider></mat-divider>
+        <div class="buttonDiv">
+            <button mat-raised-button color="primary" (click)="confirm()">OK</button>
+        </div>
+
+
+
+
+    </div>
+
+
+</div>

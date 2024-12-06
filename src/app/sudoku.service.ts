@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Board } from './models/board';
-import { Cell } from './models/cell';
 import { Key } from './models/key';
 import { BoardPlay } from './models/board-play';
 
@@ -8,8 +7,15 @@ import { BoardPlay } from './models/board-play';
   providedIn: 'root'
 })
 export class SudokuService {
+  
 
   size = Board.SIZE;
+
+  settings = {
+    highlightNumbers: true,
+    removeKeyboardWrongOptions: true
+  };
+
   board = new Board();
 
   //TEST: Do we really need to keep track of the solution?
@@ -17,6 +23,7 @@ export class SudokuService {
 
 
   keys?: Key[];
+
 
   
 
@@ -35,7 +42,8 @@ export class SudokuService {
     this.solution = b.clone();
     b.removeRandomFromCompletedBoard(30);
     
-    this.board = b;    
+    this.board = b;
+    this.board.updateSettings(this.settings);    
     return this.board;
   }
 
@@ -66,6 +74,10 @@ export class SudokuService {
 		return false; //It will cause backtracking!
 	}
 	
+  updateSettings(settings: any) {
+    this.settings = settings;
+    this.board.updateSettings(settings);
+  }
 
 
   updateCell(key: Key) {    

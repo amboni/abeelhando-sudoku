@@ -14,12 +14,12 @@ import { Board } from '../models/board';
 export class KeyboardComponent {
 
 
+
   @Input() board:Board = new Board();
   @Input() keys: Key[] = [];
 
 
-  constructor(private sudoku: SudokuService) {
-    // this.keys = sudoku.createOrGetKeys();    
+  constructor(private sudoku: SudokuService) {    
   }
 
 
@@ -32,16 +32,14 @@ export class KeyboardComponent {
     this.sudoku.updateCell(new Key());    
   }
 
-  // isSelected() {
-  //   return this.board.selectedCell;
-  // }
+  isDisabledKey(k: Key): boolean {
+    if (this.sudoku.settings.removeKeyboardWrongOptions) return k.disabled;
+    else return false; //This scenario all keys are enabled!
+  }
 
   get clearDisabled(): boolean {
-    let ret = this.board.isValidSelectedCellGuess();
-    // if (this.board.selectedCell && this.board.selectedCell.value) ret = false;
-    // .generated
+    let ret = this.board.isValidSelectedCellGuess();    
     return !ret;
-
   }
   
 

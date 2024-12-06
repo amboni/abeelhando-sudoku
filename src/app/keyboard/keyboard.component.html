@@ -3,7 +3,7 @@
 <div id="keyboardDiv">
 
     @for (k of keys; track $index) {        
-        <button class="keyboardButton" mat-fab [disabled]="k.disabled" (click)="applyKey(k)">
+        <button class="keyboardButton" mat-fab [disabled]="isDisabledKey(k)" (click)="applyKey(k)">
             {{k.value}}            
         </button>        
     }

@@ -4,19 +4,21 @@ import { Key } from "./key";
 
 export class Board {
 
-
-    static SIZE = 9;
-
+    public static SIZE = 9;
 
     data: any[] = [];
     selectedCell?: Cell;
 
-    settings = {
-        highlightNumbers: true
-    };
+    settings: any;
+    // settings = {
+    //     highlightNumbers: true,
+    //     removeWrongOptions: true
+
+    // };
 
 
-    constructor() {
+    constructor(settings: any = null) {
+        this.settings = settings;
     }
 
 
@@ -53,14 +55,14 @@ export class Board {
         } else {
             this.selectedCell = undefined;
         }
-        if (this.settings.highlightNumbers) this.highlightSameNumbers(cell.value);
+        if (this.settings?.highlightNumbers) this.highlightSameNumbers(cell.value);
         return this.selectedCell;
     }
 
     updateCell(key: Key) {
         if (this.selectedCell) {
             this.selectedCell.value = key.value;
-            if (this.settings.highlightNumbers) this.highlightSameNumbers(key.value);
+            if (this.settings?.highlightNumbers) this.highlightSameNumbers(key.value);
         }
 
     }
@@ -83,6 +85,16 @@ export class Board {
 		return true;
     }
 
+    updateSettings(s: any) {
+        //this.clear();
+        
+        //Remove any previous highlight
+        const varFn = (cell: Cell) => cell.highlight = false;
+        this.transverseData(varFn); 
+
+        this.settings = s;        
+    }
+    
 
     clear() {
         this.resetSelected();

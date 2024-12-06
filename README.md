@@ -48,6 +48,7 @@ git config --global user.name "Ricardo Amboni"
 ng g c Game
 ng g c Board
 ng g c Keyboard
+ng g c SettingsDialog
 
 ng g service Sudoku
 
